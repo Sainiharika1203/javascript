@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Fixed Deposit Calculator</title>
+    <style>
+        body {
+            font-family: 'Times New Roman', Times, serif, sans-serif;
+            background-image: url(https://thumbs.dreamstime.com/b/modern-calculator-stickers-notes-yellow-background-toned-trendy-classic-blue-color-year-modern-calculator-167715394.jpg);
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+           
+        }
+        .container {
+            background-color:rgba(0, 102, 255, 0.678);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 300px;
+        }
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        label {
+        
+            margin: 10px 0 5px;
+        }
+        input[type="text"], input[type="number"] {
+            width: calc(100% - 20px);
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            font-size: 16px;
+           
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        #result {
+            margin-top: 20px;
+            font-size: 25px;
+            color: #333;
+        }
+    
+
+</style> 
+</head>
+<body>
+    <div class="container">
+    <h2 >Fixed Deposit Calculator</h2>
+    <br>
+    <label for="">Username:</label><br>
+    <input type="text" id="username" required><br><br>
+
+    <label for="">Principal Amount (/-):</label><br>
+    <input type="text" id="principal" pattern="[0-9]{2,}" ><br><br>
+
+    <label for="">Age:</label><br>
+    <input type="text" id="age" pattern="[0-9]" ><br><br>
+
+    <label for="">Tenure (years):</label><br>
+    <input type="text" id="tenure" pattern="[0-9]" ><br><br>
+
+    <button onclick="calculateFD()">Calculate</button><br>
+
+    <p id="result"></p>
+</div>
+    <script>
+        function calculateFD() {
+            // Get input values
+            var username = document.getElementById("username").value;
+            var principal = parseFloat(document.getElementById("principal").value);
+            var age = parseInt(document.getElementById("age").value);
+            var tenure = parseFloat(document.getElementById("tenure").value);
+
+           
+            var rate;
+            if (age > 60) {
+                rate = 8;
+            } else if (age > 40 && age <= 60) {
+                rate = 7;
+            } else {
+                rate = 6; 
+            }
+
+            var interest=(principal*rate*tenure)/100;
+            var maturityAmount=principal+interest;
+            // Apply GST if tenure is more than 4 years
+            if (tenure > 4) {
+                maturityAmount -= maturityAmount * 0.05;
+            }
+
+            // Display the result
+            document.getElementById("result").innerHTML = "Hello " + username + ", the maturity amount is: /-" + maturityAmount.toFixed(2);
+        }
+    </script>
+</body>
+</html>

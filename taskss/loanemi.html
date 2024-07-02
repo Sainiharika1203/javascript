@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: 'Times New Roman', Times, serif, sans-serif;
+            background-image: url(https://i.ytimg.com/vi/EpZSijikSrI/maxresdefault.jpg);
+            background-size: cover;
+            background-attachment: fixed;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 50px;
+           
+    
+        }
+        .form1 {
+         
+            padding: 50px;
+            border-radius: 10px;
+           
+            width: 300px;
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+            font-family: 'Times New Roman', Times, serif;
+    
+        }
+        label {
+           color:#4CAF50;
+
+        }
+        input{
+            width: 75%;
+            padding: 10px;
+         
+            border: 5px solid #ccc;
+            border-radius: 5px;
+        }
+        select{
+            width: 83%;
+            padding: 10px;
+            border: 5px solid #ccc;
+           
+            border-radius: 5px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px ;
+            text-align: center;
+            font-size: 16px;
+            margin: 10px ;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        #result {
+            margin-top: 20px;
+            font-size: 25px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="form1">
+
+        <div> 
+            <h1>LOAN EMI CALCULATOR</h1>
+        <label> Username</label>
+        <input type="text" placeholder="useranme" id="usr" required pattern="[a-zA-Z]{3,}"><br>
+    </div>
+    <div>
+        <label> Password</label>
+        <input type="text" placeholder="password" id="pwd" required pattern="[a-zA-Z0-9]{6}"><br>
+    </div>
+    <div>
+        <label> TYPE OF LOAN</label><br>
+        <select id="loan" onclick="calculateEMI()">
+            <option value=""> Type of loan</option>
+        <option value="11"> HOME LOAN</option>
+        <option value="15"> VEHICLE LOAN</option> 
+        <option value="5"> EDUCATION LOAN</option>
+        <option value="12"> PERSONAL LOAN</option>
+    </select> <br>
+    </div>
+    <div> 
+        <label>PRINCIPAL AMOUNT </label><br>
+        <input type="text" placeholder="principal amount" id="pr_am"><br>
+    </div>
+    <div> 
+        <label>TENNURE </label><br>
+        <input type="text" placeholder="tenure" id="time"><br>
+    </div>
+    <button onclick="calculateEMI()">CALCULATEEMI</button><br>
+    <label id="result"> </label>
+
+    
+</div>
+<script>
+    var monthlyemi;
+function calculateEMI(){
+   
+        pwd=document.getElementById("pwd").value
+        name=document.getElementById("usr").value
+        rate=parseInt(document.getElementById("loan").value)
+        principalamount=parseInt(document.getElementById("pr_am").value)
+        time=parseInt(document.getElementById("time").value)
+        rpwd=name.slice(0,3)+"@123"
+
+        if(pwd==rpwd){
+            si=(principalamount*time*rate)/100
+    loanamount=si+principalamount
+    if(loanamount>500000){
+        loanamount+=5000
+    }
+    monthlyemi=parseInt(loanamount/(time*12))
+    document.getElementById("result").innerHTML="your emi"+monthlyemi;
+        }
+        else{
+            alert("incorrect password")
+           
+            // document.getElementById("result").innerHTML="Username or password is incorrect";
+            // document.getElementById("result").style.color="red"
+        }
+
+   
+        }
+
+</script>
+</body>
+</html>
